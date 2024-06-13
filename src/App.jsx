@@ -1,10 +1,14 @@
+import AuthAdminProvider from "./context/AdminContext"
+import Router from "./routes"
 
 
 function App() {
 
   return (
     <>
-      hello world
+      <AuthAdminProvider>
+        <Router />
+      </AuthAdminProvider>
     </>
   )
 }
