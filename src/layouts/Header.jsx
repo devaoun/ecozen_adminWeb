@@ -10,7 +10,7 @@ export default function Header() {
 
   const handleClickLogout = () => {
     navigate('/login')
-    localStorage.removeItem('accessToken')
+    localStorage.clear()
   }
 
   return (

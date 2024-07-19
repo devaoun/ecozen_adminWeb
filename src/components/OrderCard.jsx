@@ -28,7 +28,9 @@ export default function OrderCard({
 
     const handleClickPending = async () => {
         try {
-            const res = await adminApi.updateOrderStatus(orderId, 'PENDING')
+            const adminToken = localStorage.getItem('adminToken')
+            const headers = { Authorization: `Bearer ${adminToken}` }
+            const res = await adminApi.updateOrderStatus(orderId, 'PENDING',headers)
             alert(res.data.message)
             fetchUserOrder()
             setOpenInfo(false)
@@ -38,7 +40,9 @@ export default function OrderCard({
     }
     const handleClickApprove = async () => {
         try {
-            const res = await adminApi.updateOrderStatus(orderId, 'APPROVE')
+            const adminToken = localStorage.getItem('adminToken')
+            const headers = { Authorization: `Bearer ${adminToken}` }
+            const res = await adminApi.updateOrderStatus(orderId, 'APPROVE',headers)
             alert(res.data.message)
             fetchUserOrder()
             setOpenInfo(false)
@@ -54,7 +58,7 @@ export default function OrderCard({
                     <div className=" text-[20px] font-normal w-[100px] h-[30px] flex justify-center">{orderId}</div>
                     <div className=" text-[20px] font-normal w-[100px] h-[30px] flex justify-center">{userId}</div>
                     <div className=" text-[20px] font-normal w-[100px] h-[30px] flex justify-center">{username}</div>
-                    <div className=" text-[20px] font-normal w-[100px] h-[30px] flex justify-center">{total} ฿</div>
+                    <div className=" text-[20px] font-normal w-[100px] h-[30px] flex justify-center">{total.toLocaleString('en-US')} ฿</div>
                     <a href={payment} target="_blank" className=" text-[20px] font-normal w-[100px] h-[30px] flex justify-center">
                         <IconImage className="h-full" />
                     </a>
@@ -64,7 +68,7 @@ export default function OrderCard({
                 </div>
                 {openInfo ?
                     <>
-                        <hr className="border-[1px] border-gray-300" />
+                        <hr className="border-[1px] border-gray-300 "  />
                         <div className="w-full h-fit flex flex-col justify-center items-center gap-[20px] p-[20px]">
                             <div className="w-fit h-[20px] text-[20px] font-bold">Product</div>
                             <div className="flex flex-col gap-[5px]">
